@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - موقع وظيفة</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!-- Navbar in views/shared/_Navbar.cshtml -->
+    @Html.Partial("_Navbar")
+
+    <div class="container">
+        <div id="content">
+            @RenderBody()
+            <hr />
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3><i class="glyphicon glyphicon-question-sign"></i> &nbsp; من نحن</h3>
+                    <p>
+                        تسعدنا زيارتكم لنا في موقعكم "وظيفة" في موقعنا هذا يمكنكم ان تجدوا الوظيفة التي تتمنوها بكل يسر
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3><i class="glyphicon glyphicon-globe"></i> &nbsp; روابط مهمة</h3>
+                    <ul>
+                        <li><a href="#">وظائف القطاع العام</a></li>
+                        <li><a href="#">وظائف القطاع الخاص</a></li>
+                        <li><a href="#">وظائف خارج البلاد</a></li>
+                        <li><a href="#">وظائف متنوعة</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3><i class="glyphicon glyphicon-envelope"></i> &nbsp; تواصل معنا</h3>
+                    <ul>
+                        <li><a href="#">صفحتنا علي الفيسبوك</a></li>
+                        <li><a href="#">تابعنا علي تويتر</a></li>
+                        <li><a href="#">شاهدنا علي يوتيوب</a></li>
+                        <li><a href="#">اترك لنا رسالة</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <p class="copyrights lead">
+            جميع الحقوق محفوظة لموقع وظيفة - &copy; @DateTime.Now.Year
+        </p>
+    </footer>
+
+    @Scripts.Render("~/bundles/libs")
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+
+            var windowHeight = $(window).innerHeight(),
+                navHeight = $(".navbar").outerHeight(),
+                footerHeight = $("footer").outerHeight(),
+
+                result = windowHeight - (navHeight + footerHeight);
+
+
+            $("#content").css("min-height", result);
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿@model Wazifa.Models.ApplyForJob
+
+@{
+    ViewBag.Title = "تفاصيل عملية التقديم";
+}
+
+<h2>تفاصيل عملية التقديم</h2>
+
+@if (ViewBag.applyResult != null)
+{
+    <div class="alert alert-success alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p class="lead">
+            @ViewBag.applyResult
+        </p>
+    </div>
+}
+<div>
+    <h4>عملية التقديم</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplyDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplyDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("تعديل عملية التقديم", "EditApply", new { id = Model.Id }) |
+    @Html.ActionLink("عمليات التقديم", "MyAppliesJobs")
+</p>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            $("p:contains(للأسف)").
+                parents(".alert").
+                removeClass("alert-success").
+                addClass("alert-danger");
+        });
+
+    </script>
+}

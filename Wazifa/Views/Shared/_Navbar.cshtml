@@ -1,0 +1,33 @@
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/Home/Index" class="navbar-brand">
+                وظيفة
+                <span class="glyphicon glyphicon-search"></span>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse" id="mainNav">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("الرئيسية", "Index", "Home")</li>
+                <li>@Html.ActionLink("الوظائف", "Index", "Jobs")</li>
+                <li>@Html.ActionLink("انواع الوظائف", "Index", "Categories")</li>
+                <li>@Html.ActionLink("من نحن", "About", "Home")</li>
+                <li>@Html.ActionLink("اتصل بنا", "Contact", "Home")</li>
+            </ul>
+
+            @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
+            {
+                <div class="form-group">
+                    @Html.TextBox("SearchQuery", null, new { @class = "form-control input-sm", placeholder = "Search" })
+                </div>
+            }
+
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>

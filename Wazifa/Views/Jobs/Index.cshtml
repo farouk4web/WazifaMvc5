@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Wazifa.Models.Job>
+
+@{
+    ViewBag.Title = "الوظائف";
+}
+
+<h2>الوظائف</h2>
+
+<p>
+    @Html.ActionLink("إضافة وظيفة جديدة", "Create")
+</p>
+
+@if (ViewBag.msg != null)
+{
+    <div class="alert alert-success alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p class="lead">@ViewBag.msg</p>
+    </div>
+}
+
+<div class="row">
+    @foreach (var job in Model)
+    {
+        <div class="col-md-3 col-sm-4">
+            <div class="job thumbnail">
+                <h5><span class="mainColor">بواسطة : </span> @job.User.UserName</h5>
+                <img src="~/Uploads/@job.ImageSrc" alt="Alternate Text" class="jobImage" />
+                <h4>@job.Title</h4>
+                <p class="jobDescription">
+                    @Html.Raw(HttpUtility.HtmlDecode(job.Description.ToString()))
+                </p>
+                <div class="text-center">
+                    @Html.ActionLink("التفاصيل", "Details", new { id = job.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("تعديل", "Edit", new { id = job.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = job.Id }, new { @class = "btn btn-danger" })
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("p:contains(خطأ)").
+                parents(".alert").
+                removeClass("alert-success").
+                addClass("alert-danger");
+        });
+    </script>
+}

@@ -1,0 +1,66 @@
+﻿@model Wazifa.Models.Job
+
+@{
+    ViewBag.Title = "تفاصيل الوظيفة";
+}
+
+<h2>تفاصيل الوظيفة</h2>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="job">
+            <h3>بيانات الوظيفة</h3>
+
+            <dl class="dl-horizontal">
+                <dt class="mainColor">
+                    @Html.DisplayNameFor(model => model.UserId)
+                </dt>
+                <dd>
+                    @Model.User.UserName
+                </dd>
+
+                <dt class="mainColor">
+                    @Html.DisplayNameFor(model => model.CategoryId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category.Name)
+                </dd>
+
+                <dt class="mainColor">
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt class="mainColor">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    <!-- to display the result of html code -->
+                    <p class="lead">
+                        @Html.Raw(HttpUtility.HtmlDecode(Model.Description.ToString()))
+                    </p>
+                </dd>
+
+            </dl>
+
+            <div class="jobActions">
+                <h5 class="mainColor">إجراءات علي الوظيفة</h5>
+                @Html.ActionLink("التفاصيل", "Details", new { id = Model.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("تعديل", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("حذف", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("التقدم إلي الوظيفة", "ApplyToJob", "Apply", new { id = Model.Id }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("العودة إلي القائمة", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <img src="~/Uploads/@Model.ImageSrc" alt="Alternate Text" class="imageInEdit" />
+    </div>
+</div>

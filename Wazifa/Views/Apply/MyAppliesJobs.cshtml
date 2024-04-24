@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Wazifa.Models.ApplyForJob>
+
+@{
+    ViewBag.Title = "الوظائف التي قمت بالتقديم لها";
+}
+
+<h2>الوظائف التي قمت بالتقديم لها</h2>
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplyDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobId)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplyDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.job.Title)
+            </td>
+
+        <td>
+            @Html.ActionLink("تعديل", "EditApply", new { id = item.Id }) |
+            @Html.ActionLink("التفاصيل", "ApplyDetails", new { id = item.Id }) |
+            @Html.ActionLink("حذف", "DeleteApply", new { id = item.Id })
+        </td>
+        </tr>
+    }
+
+</table>

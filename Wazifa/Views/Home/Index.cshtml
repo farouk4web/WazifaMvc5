@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Wazifa.Models.Category>
+
+@{
+    ViewBag.Title = "الصفحة الرئيسية";
+}
+
+<div class="jumbotron">
+    <h1 class="mainColor">موقع وظيفة</h1>
+    <p class="lead">
+        مرحبآ بك في موقعنا يسعدنا تواجدك هنا ونود ان نعلمك انك بمقدورك من مخلال موقعنا ان تقوم بنشر وظيفة ومعرفة المتقدمين لها, او ان تقوم بالتقديم الي الوظيفة التي تناسبك إذاكنت باحث عن عمل
+    </p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">مزيد من التفاصيل &raquo;</a></p>
+</div>
+
+
+@foreach (var category in Model)
+{
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <h3>@category.Name</h3>
+            <p class="lead">
+                @category.Description
+            </p>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                @if (category.Jobs.Count() == 0)
+                {
+                    <p class="lead text-danger text-center">
+                        للأسف لا يوجد وظائف متاحة حاليآ في هذا القسم
+                    </p>
+                }
+                @foreach (var job in category.Jobs)
+                {
+                    <div class="col-md-3 col-sm-4">
+                        <div class="job thumbnail">
+                            <img src="~/Uploads/@job.ImageSrc" alt="Alternate Text" class="jobImage" />
+                            <h4>@job.Title</h4>
+                            <p class="jobDescription">
+                                @Html.Raw(HttpUtility.HtmlDecode(job.Description.ToString()))
+                            </p>
+                            @Html.ActionLink("التفاصيل", "Details", "jobs", new { id = job.Id }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+    </div>
+}

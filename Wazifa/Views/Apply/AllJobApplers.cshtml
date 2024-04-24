@@ -1,0 +1,68 @@
+﻿@model Wazifa.Models.Job
+
+@{
+    ViewBag.Title = "جميع المتقدمين";
+}
+
+<h2>جميع المتقدمين للوظيفة</h2>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="job">
+            <h3>بيانات الوظيفة</h3>
+            <h4><span class="mainColor">@Html.DisplayNameFor(m => m.UserId) : </span> @Model.User.UserName</h4>
+            <h4><span class="mainColor">@Html.DisplayNameFor(m => m.Title) : </span> @Model.Title</h4>
+            <h4 class="mainColor">@Html.DisplayNameFor(m => m.Description) : </h4>
+            <p class="lead">
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Description.ToString()))
+            </p>
+            <div class="jobActions">
+                <h5 class="mainColor">إجراءات علي الوظيفة</h5>
+                @Html.ActionLink("التفاصيل", "Details", new { id = Model.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("تعديل", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("حذف", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+                <br />
+                <br />
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <img src="~/Uploads/@Model.ImageSrc" alt="Alternate Text" class="imageInEdit" />
+    </div>
+</div>
+
+<h3>جميع المتقدمين</h3>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            اسم المتقدم
+        </th>
+        <th>
+            تاريخ التقديم
+        </th>
+        <th>
+            التفاصيل
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Applers)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplyDate)
+            </td>
+
+            <td>
+                @Html.ActionLink("تفاصيل العملية", "ApplyDetails", new { id = item.Id }) |
+            </td>
+        </tr>
+    }
+
+</table>

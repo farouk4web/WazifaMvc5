@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Wazifa.Models.Job>
+
+@{
+    ViewBag.Title = "الوظائف التي قمت نشرتها";
+}
+
+<h2>الوظائف التي قمت نشرتها</h2>
+
+<p>
+    @Html.ActionLink("إضافة وظيفة جديدة", "Create")
+</p>
+
+
+<div class="row">
+    @foreach (var job in Model)
+    {
+        <div class="col-md-3 col-sm-4">
+            <div class="job thumbnail">
+                <h5><span class="mainColor">بواسطة : </span> @job.User.UserName</h5>
+                <img src="~/Uploads/@job.ImageSrc" alt="Alternate Text" class="jobImage" />
+                <h4>@job.Title</h4>
+                <p class="jobDescription">
+                    @Html.Raw(HttpUtility.HtmlDecode(job.Description.ToString()))
+                </p>
+                <div class="text-center">
+                    @Html.ActionLink("التفاصيل", "Details", new { id = job.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("تعديل", "Edit", new { id = job.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = job.Id }, new { @class = "btn btn-danger" }) |
+                    <br />
+                    <br />
+                    @Html.ActionLink("المتقدمين", "AllJobApplers", "Apply", new { id = job.Id }, new { @class = "btn btn-default" }) |
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

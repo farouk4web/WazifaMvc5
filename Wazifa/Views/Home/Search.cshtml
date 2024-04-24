@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Wazifa.Models.Job>
+
+@{
+    ViewBag.Title = "صفحة البحث";
+}
+
+<h2>صفحة البحث</h2>
+
+@using (Html.BeginForm("Search", "Home"))
+{
+    <div class="form-group">
+        @Html.TextBox("SearchQuery", null, new { @class = "form-control input-sm", placeholder = "Search" })
+        <input type="submit" value="بحث" />
+    </div>
+}
+
+
+<div class="panel panel-info">
+
+    <div class="panel-heading">
+        <h3>نتائج البحث</h3>
+        <p class="lead">
+
+        </p>
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            @if (Model.Count() == 0)
+            {
+                <p class="lead">
+                    للأسف لم نجد اي وظيفة تتطابق مع بحثك
+                </p>
+            }
+            @foreach (var job in Model)
+            {
+                <div class="col-md-3 col-sm-4">
+                    <div class="job text-center thumbnail">
+                        <img src="~/Uploads/@job.ImageSrc" alt="Alternate Text" class="imageInEdit" />
+                        <h4>@job.Title</h4>
+                        <hr />
+                        <p>
+                            @job.Description
+                        </p>
+                        <h5 class="bg-danger">@job.User.UserName</h5>
+                        @Html.ActionLink("التفاصيل", "Details", "jobs", new { id = job.Id }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>

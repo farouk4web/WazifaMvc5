@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Wazifa.Models.Category>
+
+@{
+    ViewBag.Title = "أنواع الوظائف";
+}
+
+<h2>أنواع الوظائف</h2>
+
+<p>
+    @Html.ActionLink("إضافة نوع جديد", "Create")
+</p>
+
+
+<div class="row">
+    @foreach (var category in Model)
+    {
+        <div class="col-md-3 col-sm-4">
+            <div class="category thumbnail text-center">
+
+                <p>
+                    @category.Name
+                </p>
+
+                <div>
+                    @Html.ActionLink("التفاصيل", "Details", new { id = category.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("تعديل", "Edit", new { id = category.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = category.Id }, new { @class = "btn btn-danger" })
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

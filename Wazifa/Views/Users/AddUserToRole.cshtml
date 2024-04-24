@@ -1,0 +1,35 @@
+﻿@model Wazifa.Models.AddUserToRoleViewModel
+@{
+    ViewBag.Title = "AddUserToRole";
+}
+
+<h2>AddUserToRole</h2>
+
+
+@using (Html.BeginForm("Save", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true, "please fix this errors first")
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserRole.UserId)
+        @Html.DropDownListFor(m => m.UserRole.UserId, new SelectList(Model.Users, "Id", "UserName"), "Select User", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.UserRole.UserId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserRole.RoleName)
+        @Html.DropDownListFor(m => m.UserRole.RoleName, new SelectList(Model.Roles, "Name", "Name"), "Select Role", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.UserRole.RoleName)
+    </div>
+
+    <div class="form-group">
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Save" class="btn btn-success" />
+    </div>
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
